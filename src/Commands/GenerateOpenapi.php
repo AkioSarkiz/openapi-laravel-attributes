@@ -84,7 +84,8 @@ class GenerateOpenapi extends Command
         try {
             $transformer = app()->make(TransformerOpenapi::class);
             $schema = $transformer->transform($schema);
-        } catch (BindingResolutionException) {}
+        } catch (BindingResolutionException) {
+        }
 
         Storage::put(config('openapi.save_path'), $schema);
     }
