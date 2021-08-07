@@ -3,13 +3,15 @@
 namespace AkioSarkiz\Tests;
 
 use AkioSarkiz\OpenapiAttributesServiceProvider;
+use Config;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {
     public function setUp(): void
     {
         parent::setUp();
-        // additional setup
+
+        Config::set('openapi.scan_paths', [realpath(__DIR__ . '/app')]);
     }
 
     protected function getPackageProviders($app): array
