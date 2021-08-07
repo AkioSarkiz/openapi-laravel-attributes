@@ -18,7 +18,7 @@
         "orchestra/testbench": "^6.19",
         "symfony/finder": "^5.3",
         "symfony/http-foundation": "^5.3",
-        "uderline/openapi-php-attributes": "0.1.0"
+        "uderline/openapi-php-attributes": "0.1.1"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.0",
