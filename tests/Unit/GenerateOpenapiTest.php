@@ -13,7 +13,7 @@ class GenerateOpenapiTest extends TestCase
 {
     public function test_generate(): void
     {
-        $path =  storage_path('app/' . config('openapi.save_path'));
+        $path = storage_path('app/' . config('openapi.save_path'));
 
         if (file_exists($path)) {
             unlink($path);
@@ -30,7 +30,7 @@ class GenerateOpenapiTest extends TestCase
     public function test_transform(): void
     {
         $this->app->bind(TransformerOpenapiContract::class, TransformerOpenapi::class);
-        $path =  storage_path('app/' . config('openapi.save_path'));
+        $path = storage_path('app/' . config('openapi.save_path'));
 
         if (file_exists($path)) {
             unlink($path);
