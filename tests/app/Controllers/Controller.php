@@ -9,7 +9,7 @@ use OpenApiGenerator\Attributes\Server;
 
 #[
     Info('test'),
-    Server('test')
+
 ]
 class Controller
 {
