@@ -13,5 +13,4 @@ use OpenApiGenerator\Attributes\Server;
 ]
 class Controller
 {
-
 }
