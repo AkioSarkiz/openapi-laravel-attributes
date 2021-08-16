@@ -8,6 +8,7 @@ use AkioSarkiz\Contacts\TransformerOpenapi;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\Facades\Storage;
+use OpenApiGenerator\Exceptions\OpenapiException;
 use OpenApiGenerator\Generator;
 use Symfony\Component\Finder\Finder;
 
@@ -78,13 +79,11 @@ class GenerateOpenapi extends Command
      */
     private function generate(): void
     {
-        $data = $this->generator->generate();
-        $schema = stripslashes(json_encode($data, JSON_PRETTY_PRINT));
-
         try {
             $transformer = app()->make(TransformerOpenapi::class);
-            $schema = $transformer->transform($schema);
-        } catch (BindingResolutionException) {
+            $schema = $transformer->transform($this->generator->generate()->dataJson());
+        } catch (BindingResolutionException | OpenApiException $e) {
+            exit($e->getMessage());
         }
 
         Storage::put(config('openapi.save_path'), $schema);
