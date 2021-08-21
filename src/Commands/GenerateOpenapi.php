@@ -76,14 +76,15 @@ class GenerateOpenapi extends Command
      * Generate docs.
      *
      * @return void
+     * @throws OpenapiException
      */
     private function generate(): void
     {
         try {
             $transformer = app()->make(TransformerOpenapi::class);
             $schema = $transformer->transform($this->generator->generate()->dataJson());
-        } catch (BindingResolutionException | OpenApiException $e) {
-            exit($e->getMessage());
+        } catch (BindingResolutionException | OpenApiException) {
+            $schema = $this->generator->generate()->dataJson();
         }
 
         Storage::put(config('openapi.save_path'), $schema);
