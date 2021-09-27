@@ -1,7 +1,7 @@
 # Openapi Laravel Attributes 
 
 This package is needed to create open api documentation for laravel applications.
-It is a wrapper around another [package](https://github.com/uderline/openapi-php-attributes).
+It is a wrapper around another [package](https://github.com/akiosarkiz/openapi-attributes).
 This package does not form the UI view.
 
 ## Installation
