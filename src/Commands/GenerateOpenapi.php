@@ -41,9 +41,11 @@ class GenerateOpenapi extends Command
     /**
      * Command handler.
      *
-     * @param  Finder  $finder
-     * @param  Generator  $generator
+     * @param Finder $finder
+     * @param Generator $generator
      * @return int
+     *
+     * @throws OpenapiException
      */
     public function handle(Finder $finder, Generator $generator): int
     {

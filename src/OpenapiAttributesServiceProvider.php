@@ -6,6 +6,8 @@ namespace AkioSarkiz;
 
 use AkioSarkiz\Commands\GenerateOpenapi;
 use Illuminate\Support\ServiceProvider;
+use OpenApiGenerator\Contracts\ManagerBuilders as ManagerBuildersContract;
+use OpenApiGenerator\ManagerBuilders;
 
 class OpenapiAttributesServiceProvider extends ServiceProvider
 {
@@ -17,6 +19,8 @@ class OpenapiAttributesServiceProvider extends ServiceProvider
     public function boot(): void
     {
         if ($this->app->runningInConsole()) {
+            $this->app->bind(ManagerBuildersContract::class, ManagerBuilders::class);
+
             $this->publishes([__DIR__ . '/../config/openapi.php' => config_path('openapi.php')], 'config');
 
             $this->commands([
