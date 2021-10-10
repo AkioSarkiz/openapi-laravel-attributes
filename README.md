@@ -20,7 +20,7 @@ php artisan openapi:generate
 
 ## Overwrite json
 
-If you want to overwrite json you have to implement `\AkioSarkiz\Contacts\TransformerOpenapi` and bind it to AppServiceProvider.
+If you want to overwrite json you have to implement `AkioSarkiz\Contacts\TransformerOpenapi` and bind it to AppServiceProvider.
 
 ## Testing
 
