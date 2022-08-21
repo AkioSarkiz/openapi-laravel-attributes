@@ -1,17 +1,24 @@
 <?php
 
-namespace AkioSarkiz\Tests;
+namespace AkioSarkiz\Openapi\Tests;
 
-use AkioSarkiz\OpenapiAttributesServiceProvider;
-use Config;
+use AkioSarkiz\Openapi\OpenapiAttributesServiceProvider;
+use Illuminate\Support\Facades\Config;
+use Orchestra\Testbench\TestCase as TestCaseBase;
 
-class TestCase extends \Orchestra\Testbench\TestCase
+class TestCase extends TestCaseBase
 {
     public function setUp(): void
     {
         parent::setUp();
 
-        Config::set('openapi.scan_paths', [realpath(__DIR__ . '/app')]);
+        // setup database.
+        Config::set('database.default', 'pgsql');
+        Config::set('database.connections.pgsql.host', 'app-pgsql');
+        Config::set('database.connections.pgsql.port', '5432');
+        Config::set('database.connections.pgsql.database', 'app');
+        Config::set('database.connections.pgsql.username', 'admin');
+        Config::set('database.connections.pgsql.password', 'secret');
     }
 
     protected function getPackageProviders($app): array

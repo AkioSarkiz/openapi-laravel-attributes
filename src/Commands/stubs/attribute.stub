@@ -1,0 +1,23 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ namespace }};
+
+use Attribute;
+use JetBrains\PhpStorm\Immutable;
+
+#[
+    Attribute(Attribute::TARGET_METHOD),
+    Immutable,
+]
+class {{ class }}
+{
+     /**
+      * Create new instance.
+      */
+     public function __construct()
+     {
+        //
+     }
+}

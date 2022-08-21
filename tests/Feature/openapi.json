@@ -1,0 +1,100 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Laravel",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/users": {
+            "get": {
+                "operationId": "123456",
+                "summary": "Users index",
+                "description": "test",
+                "parameters": [],
+                "security": [],
+                "tags": [],
+                "responses": []
+            },
+            "head": {
+                "operationId": "123456",
+                "summary": "Users index",
+                "description": "test",
+                "parameters": [],
+                "security": [],
+                "tags": [],
+                "responses": []
+            },
+            "post": {
+                "operationId": "123456",
+                "summary": "Users store",
+                "description": "",
+                "parameters": [],
+                "security": [],
+                "tags": [],
+                "responses": [],
+                "requestBody": {}
+            }
+        },
+        "/users/{user}": {
+            "patch": {
+                "operationId": "123456",
+                "summary": "Users update",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "required": true,
+                        "description": "",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "security": [],
+                "tags": [],
+                "responses": [],
+                "requestBody": {}
+            },
+            "put": {
+                "operationId": "123456",
+                "summary": "Users update",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "required": true,
+                        "description": "",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "security": [],
+                "tags": [],
+                "responses": [],
+                "requestBody": {}
+            },
+            "delete": {
+                "operationId": "123456",
+                "summary": "Users destroy",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "required": true,
+                        "description": "",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "security": [],
+                "tags": [],
+                "responses": []
+            }
+        }
+    }
+}

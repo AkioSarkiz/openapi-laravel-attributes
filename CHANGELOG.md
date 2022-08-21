@@ -1,3 +1,10 @@
+## 2.0.0
+Changes
+- transformers in config
+- custom default transformers
+- custom attributes
+- support extends attributes
+
 ## 1.3.0
 ### Changes
 - update version openapi-attributes to 1.3.0

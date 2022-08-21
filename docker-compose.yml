@@ -5,8 +5,29 @@ services:
   php:
     build: ./docker/php
     container_name: package_laravel-php
-    environment:
-      XDEBUG_CONFIG: "remote_host=${XDEBUG_HOST:-192.168.220.1} remote_enable=1 remote_port=9001"
-      PHP_IDE_CONFIG: "serverName=Docker"
     volumes:
       - .:/var/www
+    networks:
+      - app-backend
+
+  pgsql:
+    image: postgres
+    container_name: app-pgsql
+    volumes:
+      - pgsql-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: app
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secret
+    ports:
+      - "5432:5432"
+    networks:
+      - app-backend
+
+volumes:
+  pgsql-data:
+    driver: local
+
+networks:
+  app-backend:
+    driver: bridge

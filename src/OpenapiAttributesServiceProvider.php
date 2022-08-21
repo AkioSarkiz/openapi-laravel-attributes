@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-namespace AkioSarkiz;
+namespace AkioSarkiz\Openapi;
 
-use AkioSarkiz\Commands\GenerateOpenapi;
+use AkioSarkiz\Openapi\Commands\GenerateOpenapi;
+use AkioSarkiz\Openapi\Commands\OpenapiAdapterMakeCommand;
+use AkioSarkiz\Openapi\Commands\OpenapiAttributeMakeCommand;
+use AkioSarkiz\Openapi\Commands\OpenapiTransformerMakeCommand;
 use Illuminate\Support\ServiceProvider;
-use OpenApiGenerator\Contracts\ManagerBuilders as ManagerBuildersContract;
-use OpenApiGenerator\ManagerBuilders;
 
 class OpenapiAttributesServiceProvider extends ServiceProvider
 {
@@ -18,15 +19,18 @@ class OpenapiAttributesServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        if ($this->app->runningInConsole()) {
-            $this->app->bind(ManagerBuildersContract::class, ManagerBuilders::class);
-
-            $this->publishes([__DIR__ . '/../config/openapi.php' => config_path('openapi.php')], 'config');
-
-            $this->commands([
-                GenerateOpenapi::class,
-            ]);
+        if (!$this->app->runningInConsole()) {
+            return;
         }
+
+        $this->publishes([__DIR__.'/../config/openapi.php' => config_path('openapi.php')], 'config');
+
+        $this->commands([
+            GenerateOpenapi::class,
+            OpenapiAdapterMakeCommand::class,
+            OpenapiAttributeMakeCommand::class,
+            OpenapiTransformerMakeCommand::class,
+        ]);
     }
 
     /**
@@ -36,6 +40,6 @@ class OpenapiAttributesServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/openapi.php', 'openapi');
+        $this->mergeConfigFrom(__DIR__.'/../config/openapi.php', 'openapi');
     }
 }

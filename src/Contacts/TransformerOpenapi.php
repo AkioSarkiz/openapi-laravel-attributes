@@ -2,15 +2,23 @@
 
 declare(strict_types=1);
 
-namespace AkioSarkiz\Contacts;
+namespace AkioSarkiz\Openapi\Contacts;
 
 interface TransformerOpenapi
 {
     /**
-     * Transform openapi json.
+     * Initialization the transformers. Arguments handle.
      *
-     * @param  string  $json
-     * @return string
+     * @param  array  $args
+     * @return void
      */
-    public function transform(string $json): string;
+    public function init(array $args): void;
+
+    /**
+     * Transform openapi json or yaml.
+     *
+     * @param  array  $schema  root schema openapi.
+     * @return array
+     */
+    public function transform(array $schema): array;
 }
