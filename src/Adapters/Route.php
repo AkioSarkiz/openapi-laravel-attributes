@@ -102,7 +102,7 @@ class Route implements AttributeAdapter
 
         $routeName = $route->getName();
 
-        if (!$routeName) {
+        if (! $routeName) {
             return '';
         }
 
@@ -119,7 +119,7 @@ class Route implements AttributeAdapter
             return app($metaAttribute->newInstance()->class)->meta();
         }
 
-        return !method_exists($reflectionClass->getName(), 'meta')
+        return ! method_exists($reflectionClass->getName(), 'meta')
             ? []
             : call_user_func([$reflectionClass->getName(), 'meta']);
     }
@@ -149,7 +149,7 @@ class Route implements AttributeAdapter
         } else {
             $attributes = $reflectionClass->getMethod($route->getActionMethod())->getAttributes(RouteAttribute::class);
 
-            return !count($attributes) ? '' : head($attributes)->newInstance()->description;
+            return ! count($attributes) ? '' : head($attributes)->newInstance()->description;
         }
     }
 
@@ -162,7 +162,7 @@ class Route implements AttributeAdapter
     {
         preg_match_all('/\{([\w\_0-9]+)(\?)?\}/', $route->uri(), $matches);
 
-        if (!count($matches[0])) {
+        if (! count($matches[0])) {
             return [];
         }
 
@@ -206,7 +206,7 @@ class Route implements AttributeAdapter
 
     private function generateRequestBody(): array|StdClass
     {
-        return new StdClass;
+        return new StdClass();
     }
 
     private function isSupportedRequestBody(string $routeMethod): bool

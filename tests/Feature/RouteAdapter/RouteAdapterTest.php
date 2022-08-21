@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AkioSarkiz\Openapi\Tests\Feature\RouteAdapter;
 
-use AkioSarkiz\Openapi\Adapters\Route;
 use AkioSarkiz\Openapi\Adapters\Route as RouteAdapter;
 use AkioSarkiz\Openapi\Tests\TestCase;
 use Illuminate\Support\Facades\Config;

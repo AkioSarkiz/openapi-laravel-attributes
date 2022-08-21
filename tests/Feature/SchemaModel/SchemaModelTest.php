@@ -36,23 +36,23 @@ class SchemaModelTest extends TestCase
             'type' => 'object',
             'properties' => [
                 'id' => [
-                    'type' => 'int64'
+                    'type' => 'int64',
                 ],
                 'email' => [
-                    'type' => 'string'
+                    'type' => 'string',
                 ],
                 'password' => [
-                    'type' => 'string'
+                    'type' => 'string',
                 ],
                 'created_at' => [
                     'type' => 'string',
-                    'format' => 'date-time'
+                    'format' => 'date-time',
                 ],
                 'updated_at' => [
                     'type' => 'string',
-                    'format' => 'date-time'
+                    'format' => 'date-time',
                 ],
-            ]
+            ],
         ]);
     }
 }

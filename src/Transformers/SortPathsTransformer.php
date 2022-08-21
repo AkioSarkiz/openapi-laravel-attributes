@@ -39,7 +39,7 @@ class SortPathsTransformer implements TransformerOpenapi
     {
         $paths = collect(Arr::get($schema, 'paths', []))->transform(function ($paths) {
             return collect($paths)
-                ->sortBy(fn($value, $key) => (int) array_search(Str::upper($key), $this->getPriority()))
+                ->sortBy(fn ($value, $key) => (int) array_search(Str::upper($key), $this->getPriority()))
                 ->all();
         });
 
@@ -70,6 +70,6 @@ class SortPathsTransformer implements TransformerOpenapi
      */
     private function setPriority(array $priority): void
     {
-        $this->customPriority = collect($priority)->transform(fn($item) => Str::upper($item))->all();
+        $this->customPriority = collect($priority)->transform(fn ($item) => Str::upper($item))->all();
     }
 }

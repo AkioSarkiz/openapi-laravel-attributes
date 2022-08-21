@@ -28,14 +28,14 @@ class VariablesParseTransformer implements TransformerOpenapi
     public function transform(array $schema): array
     {
         array_walk_recursive($schema, function (mixed &$value) {
-            if (!is_string($value)) {
+            if (! is_string($value)) {
                 return;
             }
 
             foreach ($this->variables as $variableName => $variableValue) {
                 if (is_string($variableValue) || is_float($variableValue) || is_int($variableValue)) {
                     $value = $this->replace($variableName, (string) $variableValue, $value);
-                } elseif(is_callable($variableValue)) {
+                } elseif (is_callable($variableValue)) {
                     $value = $this->replace($variableName, (string) call_user_func($variableValue, $value), $value);
                 } else {
                     echo 'Not supported variable type.' . PHP_EOL;

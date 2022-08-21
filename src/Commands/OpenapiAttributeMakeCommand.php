@@ -59,11 +59,11 @@ class OpenapiAttributeMakeCommand extends GeneratorCommand
      */
     protected function getPath($name): string
     {
-        if (!file_exists($this->laravel->basePath().'/app/Openapi')) {
+        if (! file_exists($this->laravel->basePath().'/app/Openapi')) {
             mkdir($this->laravel->basePath().'/app/Openapi');
         }
 
-        if (!file_exists($this->laravel->basePath().'/app/Openapi/Attributes')) {
+        if (! file_exists($this->laravel->basePath().'/app/Openapi/Attributes')) {
             mkdir($this->laravel->basePath().'/app/Openapi/Attributes');
         }
 

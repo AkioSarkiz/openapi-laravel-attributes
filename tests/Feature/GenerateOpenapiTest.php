@@ -8,9 +8,11 @@ use AkioSarkiz\Openapi\Commands\GenerateOpenapi;
 use AkioSarkiz\Openapi\Contacts\TransformerOpenapi as TransformerOpenapiContract;
 use AkioSarkiz\Openapi\Tests\TestCase;
 use AkioSarkiz\Openapi\Tests\Unit\Classes\TransformerOpenapi;
+
+use function config;
+
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Storage;
-use function config;
 
 class GenerateOpenapiTest extends TestCase
 {

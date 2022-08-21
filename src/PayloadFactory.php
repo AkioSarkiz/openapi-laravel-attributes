@@ -42,7 +42,7 @@ class PayloadFactory implements PayloadFactoryContract
     {
         $this->customIndex = is_int($field)
             ? $field
-            : collect($this->fields)->search(fn($arrayField) => $arrayField['field'] === $field);
+            : collect($this->fields)->search(fn ($arrayField) => $arrayField['field'] === $field);
 
         return $this;
     }

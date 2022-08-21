@@ -59,11 +59,11 @@ class OpenapiTransformerMakeCommand extends GeneratorCommand
      */
     protected function getPath($name): string
     {
-        if (!file_exists($this->laravel->basePath().'/app/Openapi')) {
+        if (! file_exists($this->laravel->basePath().'/app/Openapi')) {
             mkdir($this->laravel->basePath().'/app/Openapi');
         }
 
-        if (!file_exists($this->laravel->basePath().'/app/Openapi/Transformers')) {
+        if (! file_exists($this->laravel->basePath().'/app/Openapi/Transformers')) {
             mkdir($this->laravel->basePath().'/app/Openapi/Transformers');
         }
 

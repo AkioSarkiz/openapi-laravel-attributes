@@ -23,7 +23,6 @@ class Route
     public function __construct(
         public ?PayloadFactory $payloadFactory = null,
         public string $description = '',
-    )
-    {
+    ) {
     }
 }

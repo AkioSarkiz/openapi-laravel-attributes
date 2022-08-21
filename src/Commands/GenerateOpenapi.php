@@ -46,8 +46,7 @@ class GenerateOpenapi extends Command
      */
     public function __construct(
         private Finder $finder,
-    )
-    {
+    ) {
         parent::__construct();
     }
 

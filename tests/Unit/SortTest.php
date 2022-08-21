@@ -31,7 +31,7 @@ class SortTest extends TestCase
             'post' => [
                 'tags' => ['users'],
             ],
-        ]
+        ],
     ];
 
     public function test_sort(): void
@@ -41,7 +41,9 @@ class SortTest extends TestCase
         $transformer->init([]);
         $formattedData = $transformer->transform(['paths' => self::PATHS]);
 
-        $this->assertSame($formattedData['paths'], [
+        $this->assertSame(
+            $formattedData['paths'],
+            [
                 '/users' => [
                     'get' => [
                         'tags' => ['users'],
@@ -85,7 +87,9 @@ class SortTest extends TestCase
         ]);
         $formattedData = $transformer->transform(['paths' => self::PATHS]);
 
-        $this->assertSame($formattedData['paths'], [
+        $this->assertSame(
+            $formattedData['paths'],
+            [
                 '/users' => [
                     'delete' => [
                         'tags' => [

@@ -18,7 +18,6 @@ class SchemaModel
      */
     public function __construct(
         public null|string $model = null,
-    )
-    {
+    ) {
     }
 }

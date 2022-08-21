@@ -16,7 +16,7 @@ class RequestResponse
 {
     public function __construct(
         public PayloadFactory $factory,
-    ){
+    ) {
         //
     }
 }

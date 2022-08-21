@@ -156,7 +156,7 @@ class SchemaModel implements AttributeAdapter
             }
         }
 
-        if (!$referenceModel) {
+        if (! $referenceModel) {
             return;
         }
 
