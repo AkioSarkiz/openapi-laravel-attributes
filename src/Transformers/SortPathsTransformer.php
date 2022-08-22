@@ -59,9 +59,9 @@ class SortPathsTransformer implements TransformerOpenapi
     /**
      * @inheritDoc
      */
-    public function init(array $args): void
+    public function init(): void
     {
-        $this->setPriority(Arr::get($args, 'priority', config('openapi.custom_priority')));
+        $this->setPriority(config('openapi.custom_priority'));
     }
 
     /**

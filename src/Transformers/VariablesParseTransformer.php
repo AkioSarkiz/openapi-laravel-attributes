@@ -17,9 +17,9 @@ class VariablesParseTransformer implements TransformerOpenapi
     /**
      * @inheritDoc
      */
-    public function init(array $args): void
+    public function init(): void
     {
-        $this->variables = Arr::get($args, 'variables', config('openapi.variables', []));
+        $this->variables = config('openapi.variables', []);
     }
 
     /**

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AkioSarkiz\Openapi\Attributes;
 
+use AkioSarkiz\Openapi\PayloadFactory;
 use Attribute;
 use JetBrains\PhpStorm\Immutable;
 
@@ -16,11 +17,10 @@ class RequestBody
     /**
      * Create new instance.
      *
-     * @param  string  $class
-     * @param  string  $factory
+     * @param string|PayloadFactory|null $factory
      */
     public function __construct(
-        public string $factory = '',
+        public null|string|PayloadFactory $factory = '',
     ) {
         //
     }

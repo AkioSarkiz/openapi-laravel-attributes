@@ -38,7 +38,7 @@ class SortTest extends TestCase
     {
         /** @var SortPathsTransformer $transformer */
         $transformer = app(SortPathsTransformer::class);
-        $transformer->init([]);
+        $transformer->init();
         $formattedData = $transformer->transform(['paths' => self::PATHS]);
 
         $this->assertSame(
@@ -76,15 +76,7 @@ class SortTest extends TestCase
     {
         /** @var SortPathsTransformer $transformer */
         $transformer = app(SortPathsTransformer::class);
-        $transformer->init([
-            'priority' => [
-                'DELETE',
-                'GET',
-                'POST',
-                'PATCH',
-                'PUT',
-            ],
-        ]);
+        $transformer->init();
         $formattedData = $transformer->transform(['paths' => self::PATHS]);
 
         $this->assertSame(

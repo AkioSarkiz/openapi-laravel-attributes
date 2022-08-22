@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AkioSarkiz\Openapi\Attributes;
 
+use AkioSarkiz\Openapi\Contacts\HasMeta;
 use Attribute;
 use JetBrains\PhpStorm\Immutable;
 
@@ -16,7 +17,7 @@ class Meta
     /**
      * Create new instance attribute.
      *
-     * @param  string  $class  instanceof HasMeta.
+     * @param  class-string<HasMeta>  $class  instanceof HasMeta.
      *
      * @see HasMeta
      */

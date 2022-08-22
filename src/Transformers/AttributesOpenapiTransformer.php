@@ -12,10 +12,13 @@ use AkioSarkiz\Openapi\Attributes\RequestBody as RequestBodyAttribute;
 use AkioSarkiz\Openapi\Attributes\RequestResponse as RequestResponseAttribute;
 use AkioSarkiz\Openapi\Attributes\Route as RouteAttribute;
 use AkioSarkiz\Openapi\Attributes\SchemaModel as SchemaModelAttribute;
+use AkioSarkiz\Openapi\Console;
 use AkioSarkiz\Openapi\Contacts\AttributeAdapter;
 use AkioSarkiz\Openapi\Contacts\Resolvable;
 use AkioSarkiz\Openapi\Contacts\TransformerOpenapi;
+use AkioSarkiz\Openapi\Enums\ConsoleColor;
 use AkioSarkiz\Openapi\SchemaResolvers\RecursiveResolver;
+use Attribute;
 use Illuminate\Support\Arr;
 use JetBrains\PhpStorm\Pure;
 use ReflectionAttribute;
@@ -27,7 +30,7 @@ class AttributesOpenapiTransformer implements TransformerOpenapi
     /**
      * Custom attributes.
      *
-     * @var array<class-string, class-string>
+     * @var array<class-string<Attribute>, class-string<AttributeAdapter>>
      */
     private array $customAttributes = [];
 
@@ -60,9 +63,9 @@ class AttributesOpenapiTransformer implements TransformerOpenapi
     /**
      * @inheritDoc
      */
-    public function init(array $args): void
+    public function init(): void
     {
-        $this->customAttributes = Arr::get($args, 'attributes', []);
+        $this->customAttributes = config('openapi.attributes', []);
     }
 
     /**
@@ -74,7 +77,7 @@ class AttributesOpenapiTransformer implements TransformerOpenapi
             try {
                 $this->parseReflection(new ReflectionClass($class), $schema);
             } catch (ReflectionException) {
-                echo "Error reflection {$class}\n";
+                Console::writeln("Error reflection {$class}\n", ConsoleColor::RED());
             }
         }
 
@@ -99,35 +102,36 @@ class AttributesOpenapiTransformer implements TransformerOpenapi
         $attributeAdapterMap = $this->getAttributeAdapterMap();
 
         foreach ($attributeAdapterMap as $attribute => $adapter) {
-            if ($this->hasAttributes($reflectionClass, $attribute)) {
+            $attributesReflections = $this->getAttributes($reflectionClass, $attribute);
+
+            foreach ($attributesReflections as $attributeReflection) {
                 /** @var AttributeAdapter $adapterInstance */
                 $adapterInstance = new $adapter();
-                $adapterInstance->init($reflectionClass);
+                $adapterInstance->init($attributeReflection);
                 $schema = $this->resolveSchema($schema, $adapterInstance);
             }
         }
     }
 
     /**
-     * Search attributes in the class. When attribute exists method return true, else false.
+     * Search attributes in the class. When attribute exists method return array with reflections, else false.
      *
      * @param  ReflectionClass  $reflectionClass  Context class for search.
      * @param  string  $attributeName  Class name.
-     * @return bool
+     * @return array
      */
     #[Pure]
-    private function hasAttributes(ReflectionClass $reflectionClass, string $attributeName): bool
+    private function getAttributes(ReflectionClass $reflectionClass, string $attributeName): array
     {
-        if ($reflectionClass->getAttributes($attributeName, ReflectionAttribute::IS_INSTANCEOF)) {
-            return true;
-        }
+        $attributes = $reflectionClass->getAttributes($attributeName, ReflectionAttribute::IS_INSTANCEOF);
 
         foreach ($reflectionClass->getMethods() as $reflectionMethod) {
-            if ($reflectionMethod->getAttributes($attributeName, ReflectionAttribute::IS_INSTANCEOF)) {
-                return true;
-            }
+            $attributes = array_merge(
+                $attributes,
+                $reflectionMethod->getAttributes($attributeName, ReflectionAttribute::IS_INSTANCEOF),
+            );
         }
 
-        return false;
+        return $attributes;
     }
 }

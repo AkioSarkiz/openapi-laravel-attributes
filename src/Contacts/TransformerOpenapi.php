@@ -7,12 +7,11 @@ namespace AkioSarkiz\Openapi\Contacts;
 interface TransformerOpenapi
 {
     /**
-     * Initialization the transformers. Arguments handle.
+     * Initialization the transformers.
      *
-     * @param  array  $args
      * @return void
      */
-    public function init(array $args): void;
+    public function init(): void;
 
     /**
      * Transform openapi json or yaml.

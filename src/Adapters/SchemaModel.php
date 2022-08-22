@@ -34,15 +34,16 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use ReflectionAttribute;
 use ReflectionClass;
+use ReflectionMethod;
 
 class SchemaModel implements AttributeAdapter
 {
     /**
      * ReflectionClass with SchemaModelAttribute.
      *
-     * @var ReflectionClass
+     * @var ReflectionClass|ReflectionMethod
      */
-    private ReflectionClass $reflectionClass;
+    private ReflectionClass|ReflectionMethod $reflectionClass;
 
     private string $path;
     private array $schema;
@@ -50,9 +51,9 @@ class SchemaModel implements AttributeAdapter
     /**
      * @inheritDoc
      */
-    public function init(ReflectionClass $reflectionClass): void
+    public function init(ReflectionClass|ReflectionMethod $reflection): void
     {
-        $this->reflectionClass = $reflectionClass;
+        $this->reflectionClass = $reflection;
         $this->initPath();
         $this->initSchema();
     }

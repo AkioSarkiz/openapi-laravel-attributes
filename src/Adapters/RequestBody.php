@@ -6,16 +6,17 @@ namespace AkioSarkiz\Openapi\Adapters;
 
 use AkioSarkiz\Openapi\Contacts\AttributeAdapter;
 use ReflectionClass;
+use ReflectionMethod;
 
 class RequestBody implements AttributeAdapter
 {
     private string $path;
     private array $schema;
-    private ReflectionClass $reflectionClass;
+    private ReflectionClass|ReflectionMethod $reflectionClass;
 
-    public function init(ReflectionClass $reflectionClass): void
+    public function init(ReflectionClass|ReflectionMethod $reflection): void
     {
-        $this->reflectionClass = $reflectionClass;
+        $this->reflectionClass = $reflection;
 
         $this->initPath();
         $this->initSchema();

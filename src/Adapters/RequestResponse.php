@@ -6,17 +6,18 @@ namespace AkioSarkiz\Openapi\Adapters;
 
 use AkioSarkiz\Openapi\Contacts\AttributeAdapter;
 use ReflectionClass;
+use ReflectionMethod;
 
 class RequestResponse implements AttributeAdapter
 {
-    private ReflectionClass $reflectionClass;
+    private ReflectionClass|ReflectionMethod $reflectionClass;
 
     /**
      * @inheritDoc
      */
-    public function init(ReflectionClass $reflectionClass): void
+    public function init(ReflectionClass|ReflectionMethod $reflection): void
     {
-        $this->reflectionClass = $reflectionClass;
+        $this->reflectionClass = $reflection;
     }
 
     /**

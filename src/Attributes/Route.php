@@ -17,11 +17,11 @@ class Route
     /**
      * Create new instance.
      *
-     * @param  PayloadFactory|null  $payloadFactory
-     * @param  string  $description
+     * @param string|PayloadFactory|null $factory
+     * @param string $description
      */
     public function __construct(
-        public ?PayloadFactory $payloadFactory = null,
+        public null|string|PayloadFactory $factory = null,
         public string $description = '',
     ) {
     }

@@ -15,7 +15,7 @@ use JetBrains\PhpStorm\Immutable;
 class RequestResponse
 {
     public function __construct(
-        public PayloadFactory $factory,
+        public null|string|PayloadFactory $factory = null,
     ) {
         //
     }

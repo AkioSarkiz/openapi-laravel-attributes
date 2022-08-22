@@ -5,14 +5,15 @@ declare(strict_types=1);
 namespace AkioSarkiz\Openapi\Contacts;
 
 use ReflectionClass;
+use ReflectionMethod;
 
 interface AttributeAdapter
 {
     /**
-     * @param  ReflectionClass  $reflectionClass
+     * @param  ReflectionClass|ReflectionMethod  $reflection
      * @return void
      */
-    public function init(ReflectionClass $reflectionClass): void;
+    public function init(ReflectionClass|ReflectionMethod $reflection): void;
 
     /**
      * Get path of schema. Supported dots.

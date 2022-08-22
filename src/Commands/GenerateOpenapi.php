@@ -91,7 +91,7 @@ class GenerateOpenapi extends Command
      */
     private function generate(): void
     {
-        $payload = $this->getPayload();
+        $payload = $this->getBasePayload();
         $this->transformPayload($payload);
         $this->savePayload($payload);
     }
@@ -122,7 +122,7 @@ class GenerateOpenapi extends Command
     }
 
     #[ArrayShape(['openapi' => "string", 'info' => "array"])]
-    private function getPayload(): array
+    private function getBasePayload(): array
     {
         return [
             'openapi' => '3.0.0',
@@ -154,13 +154,14 @@ class GenerateOpenapi extends Command
     {
         foreach (config('openapi.transformers') as $transformer) {
             try {
-                $formattedTransform = $this->formatTransformer($transformer);
-                /** @var TransformerOpenapi $transformerInstance */
-                $transformerInstance = app()->make($formattedTransform['class']);
-                $transformerInstance->init($formattedTransform['args']);
+                $transformerInstance = app()->make($transformer);
+                $transformerInstance->init();
                 $payload = $transformerInstance->transform($payload);
-            } catch (BindingResolutionException) {
-                // ignore
+            } catch (BindingResolutionException $e) {
+                Console::writeln(
+                    $e->getMessage(),
+                    ConsoleColor::YELLOW(),
+                );
             }
         }
     }

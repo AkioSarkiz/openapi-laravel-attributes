@@ -23,7 +23,7 @@ class TransformerOpenapi implements TransformerOpenapiContract
     /**
      * @inheritDoc
      */
-    public function init(array $args): void
+    public function init(): void
     {
         //
     }

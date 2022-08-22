@@ -14,17 +14,20 @@ use Illuminate\Support\Facades\Route as RouteFacade;
 use Illuminate\Support\Str;
 use ReflectionAttribute;
 use ReflectionClass;
+use ReflectionMethod;
 use stdClass;
 
 class Route implements AttributeAdapter
 {
-    private ReflectionClass $reflectionClass;
+    private ReflectionClass|ReflectionMethod $reflection;
+
     private string $path;
+
     private array $schema;
 
-    public function init(ReflectionClass $reflectionClass): void
+    public function init(ReflectionClass|ReflectionMethod $reflection): void
     {
-        $this->reflectionClass = $reflectionClass;
+        $this->reflection = $reflection;
 
         $this->initPath();
         $this->initSchema();
@@ -47,10 +50,11 @@ class Route implements AttributeAdapter
 
     private function initSchema(): void
     {
-        $reflectionClass = $this->reflectionClass;
+        $reflectionClass = $this->reflection;
         $routeCollection = RouteFacade::getRoutes();
+        $methods = $this->reflection instanceof ReflectionClass ? $this->reflection->getMethods() : [$this->reflection];
 
-        foreach ($reflectionClass->getMethods() as $method) {
+        foreach ($methods as $method) {
             $route = $routeCollection->getByAction($reflectionClass->getName() . '@' . $method->getName());
 
             if ($route) {
@@ -111,7 +115,7 @@ class Route implements AttributeAdapter
 
     private function getMeta(): array
     {
-        $reflectionClass = $this->reflectionClass;
+        $reflectionClass = $this->reflection;
         /** @var ReflectionAttribute $metaAttribute */
         $metaAttribute = head($reflectionClass->getAttributes(Meta::class));
 
@@ -141,7 +145,7 @@ class Route implements AttributeAdapter
 
     private function generateDescription(LaravelRoute $route): string
     {
-        $reflectionClass = $this->reflectionClass;
+        $reflectionClass = $this->reflection;
         $description = $this->getMetaRouteValue($route, 'description');
 
         if ($description) {
