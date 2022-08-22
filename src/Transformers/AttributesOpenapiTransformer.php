@@ -19,7 +19,6 @@ use AkioSarkiz\Openapi\Contacts\TransformerOpenapi;
 use AkioSarkiz\Openapi\Enums\ConsoleColor;
 use AkioSarkiz\Openapi\SchemaResolvers\RecursiveResolver;
 use Attribute;
-use Illuminate\Support\Arr;
 use JetBrains\PhpStorm\Pure;
 use ReflectionAttribute;
 use ReflectionClass;

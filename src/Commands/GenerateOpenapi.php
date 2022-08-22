@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace AkioSarkiz\Openapi\Commands;
 
 use AkioSarkiz\Openapi\Console;
-use AkioSarkiz\Openapi\Contacts\TransformerOpenapi;
 use AkioSarkiz\Openapi\Enums\ConsoleColor;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Container\BindingResolutionException;

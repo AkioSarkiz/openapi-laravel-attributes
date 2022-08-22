@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace AkioSarkiz\Openapi\Transformers;
 
 use AkioSarkiz\Openapi\Contacts\TransformerOpenapi;
-use Illuminate\Support\Arr;
 
 class VariablesParseTransformer implements TransformerOpenapi
 {
